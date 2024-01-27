@@ -7,4 +7,5 @@ employees = [ { 'id': 1, 'name': 'Kalani Matton' }, { 'id': 2, 'name': 'Kai' }, 
 
 @app.route('/employees', methods=['GET'])
 def get_employees():
-    return jsonify(employees)
+    diet = request.args.get('diet')
+    return diet
