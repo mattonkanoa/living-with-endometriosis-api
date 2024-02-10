@@ -3,21 +3,29 @@ import requests
 from flask import Flask, request
 
 app = Flask(__name__)
+
+spoonacularBaseUrl = "https://api.spoonacular.com"
 spoonacularApiKey = config.spoonacularApiKey
 
-# api route for fetching recipes https://spoonacular.com/food-api/docs#Search-Recipes-Complex
+# api route for fetching comlex recipes https://spoonacular.com/food-api/docs#Search-Recipes-Complex
 @app.route('/search-recipes', methods=['GET'])
 def getRecipes():
-    # The food type e.g. rice, pasta, steak
-    foodType = request.args.get('query') 
-    cuisine = request.args.get('cuisine') 
-    diet = request.args.get('diet')
-    maxCalories = request.args.get('maxCalories')
+    foodType = request.args.get('query', "") 
+    cuisine = request.args.get('cuisine', "") 
+    diet = request.args.get('diet', "")
+    maxCalories = request.args.get('maxCalories', "")
 
-    # Build url - TEST
-    urlString = f"https://api.spoonacular.com/recipes/complexSearch?query={foodType}&number=10&apiKey={spoonacularApiKey}"
-    results = requests.get(urlString)
+    url = spoonacularBaseUrl + "/recipes/complexSearch"
 
+    queryParameters = {
+        "query" : foodType,
+        "cuisine" : cuisine,
+        "diet" : diet,
+        "maxCalories" : maxCalories,
+        "number" : 10
+    }
+
+    results = requests.get(url=url, params=queryParameters)
     return results.text
 
 # api route for similar recipes https://spoonacular.com/food-api/docs#Get-Similar-Recipes
