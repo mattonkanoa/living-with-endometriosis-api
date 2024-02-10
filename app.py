@@ -18,7 +18,7 @@ def getRecipes():
     urlString = f"https://api.spoonacular.com/recipes/complexSearch?query={foodType}&number=10&apiKey={spoonacularApiKey}"
     results = requests.get(urlString)
 
-    return results
+    return results.text
 
 # api route for similar recipes https://spoonacular.com/food-api/docs#Get-Similar-Recipes
 @app.route('/search-similar-recipes', methods=['GET'])
