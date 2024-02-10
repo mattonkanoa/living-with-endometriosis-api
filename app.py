@@ -10,14 +10,14 @@ spoonacularApiKey = config.spoonacularApiKey
 # api route for fetching comlex recipes https://spoonacular.com/food-api/docs#Search-Recipes-Complex
 @app.route('/search-recipes', methods=['GET'])
 def getRecipes():
-    foodType = request.args.get('query', "") 
-    cuisine = request.args.get('cuisine', "") 
-    diet = request.args.get('diet', "")
-    maxCalories = request.args.get('maxCalories', "")
+    foodType = request.args.get('query', None) 
+    cuisine = request.args.get('cuisine', None) 
+    diet = request.args.get('diet', None)
+    maxCalories = request.args.get('maxCalories', None)
 
     url = spoonacularBaseUrl + "/recipes/complexSearch"
 
-    queryParameters = {
+    parameters = {
         "query" : foodType,
         "cuisine" : cuisine,
         "diet" : diet,
@@ -25,6 +25,9 @@ def getRecipes():
         "number" : 10,
         "apiKey" : spoonacularApiKey
     }
+
+    # Only add the items in the query if they don't contain `None`
+    queryParameters = {key : value for key, value in parameters.items() if value is not None}
 
     results = requests.get(url=url, params=queryParameters)
     app.logger.warning(f"REQUEST URL LOG: {results.url}")
