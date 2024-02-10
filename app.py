@@ -27,6 +27,8 @@ def getRecipes():
     }
 
     results = requests.get(url=url, params=queryParameters)
+    app.logger.info(f"REQUEST URL LOG: {results.url}")
+    
     return results.text
 
 # api route for similar recipes https://spoonacular.com/food-api/docs#Get-Similar-Recipes
