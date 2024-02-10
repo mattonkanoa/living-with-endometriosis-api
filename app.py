@@ -28,9 +28,7 @@ def getRecipes():
 
     # Only add the items in the query if they don't contain `None`
     queryParameters = {key : value for key, value in parameters.items() if value is not None}
-
     results = requests.get(url=url, params=queryParameters)
-    app.logger.warning(f"REQUEST URL LOG: {results.url}")
 
     return results.text
 
