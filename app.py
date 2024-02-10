@@ -35,9 +35,9 @@ def getRecipes():
 # api route for similar recipes https://spoonacular.com/food-api/docs#Get-Similar-Recipes
 @app.route('/search-similar-recipes', methods=['GET'])
 def getSimilarRecipes():
-    return True
+    return ""
 
 # api route for random recipes https://spoonacular.com/food-api/docs#Get-Random-Recipes
 @app.route('/search-random-recipe', methods=['GET'])
 def getRandomReccuipes():
-    return True
+    return ""
