@@ -22,7 +22,8 @@ def getRecipes():
         "cuisine" : cuisine,
         "diet" : diet,
         "maxCalories" : maxCalories,
-        "number" : 10
+        "number" : 10,
+        "apiKey" : spoonacularApiKey
     }
 
     results = requests.get(url=url, params=queryParameters)
@@ -35,5 +36,5 @@ def getSimilarRecipes():
 
 # api route for random recipes https://spoonacular.com/food-api/docs#Get-Random-Recipes
 @app.route('/search-random-recipe', methods=['GET'])
-def getRandomRecipes():
+def getRandomReccuipes():
     return True
